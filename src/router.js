@@ -8,8 +8,7 @@ export function Router(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path='*' element={<Home />} />
-                <Route path="/cadastro-produto" element={<CadastroProduto />} />
+                <Route path="*" element={<CadastroProduto />} />
             </Routes>
         </BrowserRouter>
     )
