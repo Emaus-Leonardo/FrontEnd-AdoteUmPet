@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FrontEnd-AdoteUmPet/static/css/main.3eae78a5.css",
+    "main.js": "/FrontEnd-AdoteUmPet/static/js/main.131db67b.js",
+    "index.html": "/FrontEnd-AdoteUmPet/index.html",
+    "main.3eae78a5.css.map": "/FrontEnd-AdoteUmPet/static/css/main.3eae78a5.css.map",
+    "main.131db67b.js.map": "/FrontEnd-AdoteUmPet/static/js/main.131db67b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3eae78a5.css",
+    "static/js/main.131db67b.js"
+  ]
+}
