@@ -1,0 +1,197 @@
+@keyframes bar {
+  0%{
+    width: 0%;
+  }
+
+  100%{
+    width: 100%;
+  }
+}
+
+.header {
+  align-items: center;
+  background-color: var(--concrete);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 26px;
+  height: 100%;
+  padding-top: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.flex-row {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: 100%;
+  width: 95%;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: auto;
+}
+
+a{
+  text-decoration: none;
+}
+
+.vector {
+  height: 35px;
+  width: 39px;
+}
+
+.title {
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0;
+}
+
+.span1 {
+  color: var(--pelorous);
+}
+
+.span0 {
+  color: var(--cod-gray);
+}
+
+.menu_opc {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  gap: 24px;
+  position: relative;
+  width: fit-content;
+}
+
+.menu_opc a{
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.menu_opc a:hover{
+  color: var(--pelorous);
+}
+
+.menu_opc a:hover::after{
+  animation: bar 1s;
+  border-bottom: 1px solid var(--pelorous);
+  content: "";
+  display: block;
+  height: 2px;
+  position: absolute;
+  width: 100%;
+}
+
+.adote-um-pet {
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.montserrat-bold-cod-gray-16px {
+  color: var(--cod-gray);
+  font-family: var(--font-family-montserrat);
+  font-size: var(--font-size-m);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sobre-nos {
+  cursor: pointer;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.faca_denuncia {
+  cursor: pointer;
+  letter-spacing: 0;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.botoes {
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.botoes {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  height: 48px;
+  font-size: 16px;
+}
+
+.botao_login {
+  align-items: center;
+  border: 2px solid;
+  border-color: var(--concrete);
+  background-color: var(--pelorous);
+  border-radius: 8px;
+  color: var(--concrete);
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 24px;
+  position: relative;
+  width: fit-content;
+  transition: all 1s;
+}
+
+.botao_login:hover {
+  color: var(--pelorous);
+  border-color: var(--pelorous);
+  background-color: var(--concrete);
+}
+
+.botao_cad {
+  align-items: center;
+  border: 2px solid;
+  border-color: var(--pelorous);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 12px 24px;
+  position: relative;
+  width: fit-content;
+}
+
+.cadastre-se {
+  color: var(--pelorous);
+  font-family: var(--font-family-montserrat);
+  position: relative;
+  text-align: center;
+  width: fit-content;
+}
+
+.line{
+  width: 100%;
+}

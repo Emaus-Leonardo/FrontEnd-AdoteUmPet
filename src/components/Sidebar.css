@@ -1,0 +1,37 @@
+@keyframes showSidebar {
+  from {
+    opacity: 0;
+    left: -100%;
+  }
+  to {
+    opacity: 1;
+    left: 0%;
+  }
+}
+
+.container-sidebar {
+  animation: showSidebar 0.4s;
+  height: auto;
+  left: 0px;
+  top: 40px;
+  position: fixed;
+  width: 200px;
+  z-index: 5;
+}
+
+.container-sidebar.true{
+    left: -100%;
+}
+
+.container-sidebar > svg {
+  align-items: center;
+  color: var(--cod-gray);
+  cursor: pointer;
+  display: flex;
+  height: 30px;
+  width: 30px;
+}
+
+.content-sidebar{
+    margin-top: 60px;
+}

@@ -1,0 +1,47 @@
+﻿.conteudo_sobre{
+    width: 75%;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.title_sobre {
+    color: transparent;
+    font-family: var(--font-family-montserrat);
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: 0;
+    min-height: 47px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.img_row_sobre{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.img_row_sobre img{
+    width: 33.3%;
+}
+.span1_sobre {
+    color: var(--pelorous);
+}
+
+
+.texto_sobre{
+    font-family: var(--font-family-montserrat);
+    font-size: var(--font-size-m);
+    color: var(--cod-gray);
+    font-weight: 500;
+    text-align: justify;
+}
+
+p {
+    margin-bottom: 0 }
+  p + p {
+    text-indent: 1.5em;
+    margin-top: 10px }

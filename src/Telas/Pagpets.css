@@ -1,0 +1,358 @@
+.pagpetsRootRoot {
+  gap: 39px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  padding: 20px 0;
+}
+
+.title2 {
+  color: #3ab1b9;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.group {
+  width: 736px;
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+}
+.searchInput {
+  width: 99.16%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 8px 16px;
+  border-width: 1px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #3ab1b9;
+  box-sizing: border-box;
+  color: #000;
+  font-size: 12px;
+  font-family: Montserrat;
+  line-height: 24px;
+  white-space: nowrap;
+  background-color: #f2f2f2;
+}
+
+.botaoprimario {
+  margin-left: 10px;
+  width: 17.8%;
+  padding: 10px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #3ab1b9;
+}
+
+.searchButton {
+  color: #f2f2f2;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  border-width: 0px;
+  box-sizing: border-box;
+  background: none;
+  cursor: pointer;
+}
+
+.container-pet {
+  width: 1129px;
+  gap: 24px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+.filtersWrapper {
+  width: 17.27%;
+  gap: 8px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-self: flex-start;
+  /* align-items: flex-start; */
+  /* margin: 0px 16px 0px 0px; */
+  padding: 16px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #e6e6e6;
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.25);
+}
+.filtersTitle {
+  margin: 0px 0px 2px 0px;
+  color: #3ab1b9;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.checkbox-label {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  font-family: Montserrat;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
+.checkbox-label span {
+  font-size: 12px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  height: 16px;
+  margin: 0;
+  width: 16px;
+}
+
+.group2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+.group5 {
+  width: 80px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group6 {
+  width: 53px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group7 {
+  width: 67px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group8 {
+  width: 65px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group9 {
+  width: 116px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group10 {
+  width: 100px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.group11 {
+  width: 105px;
+  gap: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0px 0px 8px 0px;
+  box-sizing: border-box;
+}
+.botaoprimario7 {
+  width: 100%;
+  display: flex;
+  color: #ffff;
+  font-weight: bold;
+  font-family: Montserrat;
+  line-height: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  background-color: #3ab1b9;
+  border: #3ab1b9;
+}
+.botaosec {
+  width: 99.39%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  padding: 10px 22px;
+  border-width: 2px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #3ab1b9;
+  box-sizing: border-box;
+}
+.clearFiltersButton {
+  color: #3ab1b9;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+  border-width: 0px;
+  box-sizing: border-box;
+  background: none;
+  cursor: pointer;
+}
+.queroAdotar {
+  color: #f2f2f2;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* .rectangle1 {
+    width: 282px;
+    min-width: 0px;
+    height: 282px;
+    min-height: 0px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    box-sizing: border-box;
+  } */
+.rectangle2 {
+  width: 100%;
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px 42px 11px 42px;
+  border-radius: 0px 0px 8px 8px;
+  box-sizing: border-box;
+  background-color: #e6e6e6;
+}
+.group12 {
+  width: 197px;
+  gap: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+}
+.petName {
+  margin: 0px 1px 0px 0px;
+  color: #0c0c0c;
+  font-weight: 700;
+  font-family: Montserrat;
+  line-height: 24px;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.linepet {
+  width: 1px;
+  height: 25px;
+  flex-shrink: 0;
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: #3ab1b9;
+  box-sizing: border-box;
+}
+
+.petAge {
+  margin: 0px 1px 0px 0px;
+  color: #0c0c0c;
+  font-family: Montserrat;
+  line-height: 24px;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+.petGender {
+  color: #0c0c0c;
+  font-family: Montserrat;
+  line-height: 24px;
+  box-sizing: border-box;
+}
+.botaoprimario1 {
+  width: 204px;
+  gap: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #3ab1b9;
+}
+.vectorpet {
+  width: 22px;
+  min-width: 0px;
+  min-height: 0px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.applyFiltersButton {
+  color: #f2f2f2;
+  font-weight: bold;
+  font-family: Montserrat;
+  line-height: 24px;
+  white-space: nowrap;
+  border-width: 0px;
+  box-sizing: border-box;
+  background: none;
+  cursor: pointer;
+}
