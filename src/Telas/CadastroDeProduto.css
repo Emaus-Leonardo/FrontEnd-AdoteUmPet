@@ -23,6 +23,7 @@
 }
 
 .titulo {
+    font-family: var(--font-family-montserrat);
     font-size: 30px;
     align-items: center;
     display: flex;
