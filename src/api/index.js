@@ -1,5 +1,5 @@
-const apiProdutos = "http://localhost:4001/produto";
-export const urLBase = "http://localhost:4000";
+const apiProdutos = "http://129.146.68.51/aluno12-pfsii/produto";
+export const urLBase = "http://localhost:4012";
 
 //================== API-Produtos ==================//
 
