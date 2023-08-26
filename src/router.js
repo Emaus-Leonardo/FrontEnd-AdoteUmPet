@@ -8,7 +8,7 @@ export function Router(){
         <BrowserRouter>
             <Routes>
                 <Route path="*" element={<CadastroProduto />} />
-                <Route path="/cadastro-Categoria" element={<CadastroCategoria />}/>
+                <Route path="/cadastro-categoria" element={<CadastroCategoria />}/>
             </Routes>
         </BrowserRouter>
     )
