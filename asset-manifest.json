@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/FrontEnd-AdoteUmPet/static/css/main.e2d67a61.css",
-    "main.js": "/FrontEnd-AdoteUmPet/static/js/main.b3430676.js",
+    "main.js": "/FrontEnd-AdoteUmPet/static/js/main.20f124c8.js",
     "index.html": "/FrontEnd-AdoteUmPet/index.html",
     "main.e2d67a61.css.map": "/FrontEnd-AdoteUmPet/static/css/main.e2d67a61.css.map",
-    "main.b3430676.js.map": "/FrontEnd-AdoteUmPet/static/js/main.b3430676.js.map"
+    "main.20f124c8.js.map": "/FrontEnd-AdoteUmPet/static/js/main.20f124c8.js.map"
   },
   "entrypoints": [
     "static/css/main.e2d67a61.css",
-    "static/js/main.b3430676.js"
+    "static/js/main.20f124c8.js"
   ]
 }
