@@ -4,20 +4,20 @@ import { Footer } from "../components/Footer";
 import { Inputs } from "../components/inputs";
 import { Select } from "../components/Select";
 import { Textarea } from "../components/textarea";
+import * as Popover from '@radix-ui/react-popover';
 import "./CadastroDeProduto.css";
 
-import { Cards } from "@phosphor-icons/react";
+import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
-import {
-  getProdutos,
-  handleSubmit,
-  editarProdutos,
-} from "../api/index";
+import { getProdutos, handleSubmit, editarProdutos, } from "../api/index";
+
+const menuProps = "CadastroProduto" || "CadastroCategoria"
 
 export function CadastroProduto(props) {
   const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
+  const [menu, setMenu] = useState(menuProps);
 
   const tableHead = ["Codigo", "Nome", "Preço", "Descrição", "Categoria"];
 
@@ -38,6 +38,13 @@ export function CadastroProduto(props) {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (menu === "CadastroProduto") {
+    } else if (menu === "CadastroCategoria") {
+      window.location.href = "/cadastro-categoria"; // Redirecionamento para a página de cadastro de categoria
+    }
+  }, [menu]);
 
   function maskPrice(event) {
     var price = event.target.value;
@@ -74,7 +81,7 @@ export function CadastroProduto(props) {
       // Remove o símbolo "R$" e qualquer caractere não numérico do campo de preço
       const preco = produto.preco.replace(/[^\d.]/g, "");
       const produtoAtualizado = { ...produto, preco };
-  
+
       await handleSubmit(produtoAtualizado);
       // Limpe os campos do formulário
       resetForm();
@@ -82,11 +89,10 @@ export function CadastroProduto(props) {
       // Exiba o alerta
       setValidated(true);
     }
-  
+
     const produtos = await getProdutos();
     setAllRegisters(produtos);
   }
-  
 
   async function handleAtualizacao() {
     await editarProdutos(produto, setProduto);
@@ -113,7 +119,7 @@ export function CadastroProduto(props) {
       <main className="mainSection">
         <section className="FormProduto_container">
           <div className="form-produtos-titulo centro_logo">
-          <div className="titulo">
+            <div className="titulo">
               <img
                 className="vector vectoranimais"
                 src={"vector-3.svg"}
@@ -123,14 +129,31 @@ export function CadastroProduto(props) {
                 Cadastro de <span className="span1">Produtos</span>
               </>
             </div>
-            <Cards
-              className="svg-modal"
-              size={32}
-              onClick={() => setModal(true)}
-            />
+            <Popover.Root>
+              <Popover.Trigger className="pop-trigger">
+                <DotsThreeVertical size={32} />
+              </Popover.Trigger>
+
+              <Popover.Portal>
+                <Popover.Content className="pop-content">
+                  <button className="button-pop-trigger" onClick={() => setModal(true)}>
+                    <Cards size={32} />
+                    <span>Modal</span>
+                  </button>
+
+                  <button className="button-pop-trigger" onClick={() => setMenu("CadastroCategoria")}>
+                    <PlusCircle size={32} />
+                    <span>Cadastrar Categoria</span>
+                  </button>
+                </Popover.Content>
+
+              </Popover.Portal>
+            </Popover.Root>
+            
           </div>
 
-          <form noValidate onSubmit={handleFormSubmit}>
+          <form 
+          noValidate onSubmit={handleFormSubmit}>
             <Inputs
               type="number"
               text="Código do Produto"

@@ -174,7 +174,6 @@
 
 .span1{
     padding: 5px;
-    margin-top: 4px;
     font-weight: bold;
 }
 
@@ -269,4 +268,25 @@
     .form_control textarea {
         width: 1000px;
     }
+}
+
+/* testes */
+
+.container-main.cadastros {
+    background-color: #3ab1b9;
+    height: auto;
+}
+
+.flex-col, main {
+    display: flex;
+    flex-direction: column;
+}
+
+.aside-cadastro-aceitafazer {
+    height: calc(100vh - 108px)!important;
+}
+
+.arrow {
+    cursor: pointer;
+    width: auto;
 }

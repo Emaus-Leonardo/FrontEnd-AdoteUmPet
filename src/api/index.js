@@ -1,5 +1,5 @@
 const apiProdutos = "https://129.146.68.51/aluno12-pfsii/produto";
-export const urLBase = "https://localhost:4012";
+const apiCategoria = "https://129.146.68.51/aluno12-pfsii/categoria";
 
 //================== API-Produtos ==================//
 
@@ -59,3 +59,56 @@ export async function editarProdutos(produto) {
       throw error;
     }
   }
+ //----------------------------- API Categorias ---------------------------------//
+
+ export async function getAllCategorias(){
+  let aux = await fetch(apiCategoria, {
+      method: "GET",
+  })
+  .then((data) => data.json())
+  .then((repos) => repos)
+  .catch(e => e);
+
+  return aux;
+}
+
+export async function createRegisterCategoria(register){
+  const message = await fetch(`${apiCategoria}`, {
+      method: "POST",
+      body: JSON.stringify(register),
+      headers: {
+          "Content-Type": "application/json",
+      },
+  })
+  .then(() => "Tarefa cadastrado com sucesso")
+  .catch((err) => err)
+
+  return message;
+}
+
+export async function editRegisterCategoria(register, index){
+  const message = await fetch(`${apiCategoria}/${index}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+       },
+      body: JSON.stringify(register),
+  })
+  .then(() => "Tarefa editada com sucesso")
+  .catch((err) => err)
+
+  return message;
+}
+
+export async function deleteCategoriaP(id){
+  let aux = await fetch(`${apiCategoria}/${id}`, {
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json",
+       },
+  })
+  .then(() =>  "Tarefa deletada com sucesso")
+  .catch((err) => err)
+
+  return aux;
+}
