@@ -8,6 +8,7 @@ import "./CadastroDeProduto.css";
 
 import { useState, useEffect } from "react";
 import {getProdutos, handleSubmit,editarProdutos,} from "../api/index";
+import { Link } from "react-router-dom";
 //import { Card } from "react-bootstrap";
 
 const menuProps = "CadatroProduto" || "CadatroCategoria"
@@ -33,13 +34,6 @@ export function CadastroCategoria(props) {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (menu === "CadastroProduto") {
-      window.location.href = "/cadastro-produto"; // Redirecionamento para a página de cadastro de produto
-    } else if (menu === "CadastroProduto") {
-    }
-  }, [menu]);
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -110,7 +104,9 @@ export function CadastroCategoria(props) {
               </>
             </div>
 
+            <Link to={"/cadastro-produto"}> 
             <ArrowLeft className="arrow" size={32} onClick={() => setMenu("CadastroProduto")} />
+            </Link>
         </div>
 
           <form noValidate onSubmit={handleFormSubmit}>

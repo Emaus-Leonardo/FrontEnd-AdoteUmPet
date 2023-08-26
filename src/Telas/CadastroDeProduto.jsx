@@ -11,6 +11,7 @@ import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
 import { getProdutos, handleSubmit, editarProdutos, } from "../api/index";
+import { Link } from "react-router-dom";
 
 const menuProps = "CadastroProduto" || "CadastroCategoria"
 
@@ -38,13 +39,6 @@ export function CadastroProduto(props) {
     }
     fetchData();
   }, []);
-
-  useEffect(() => {
-    if (menu === "CadastroProduto") {
-    } else if (menu === "CadastroCategoria") {
-      window.location.href = "/cadastro-categoria"; // Redirecionamento para a página de cadastro de categoria
-    }
-  }, [menu]);
 
   function maskPrice(event) {
     var price = event.target.value;
@@ -141,10 +135,12 @@ export function CadastroProduto(props) {
                     <span>Modal</span>
                   </button>
 
+                  <Link to={"/cadastro-categoria"}>
                   <button className="button-pop-trigger" onClick={() => setMenu("CadastroCategoria")}>
                     <PlusCircle size={32} />
                     <span>Cadastrar Categoria</span>
                   </button>
+                  </Link>
                 </Popover.Content>
 
               </Popover.Portal>
