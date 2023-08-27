@@ -10,15 +10,14 @@ import "./CadastroDeProduto.css";
 import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
-import { getProdutos, handleSubmit, editarProdutos, } from "../api/index";
-import { Link } from "react-router-dom";
+import { getProdutos, handleSubmit, editarProdutos } from "../api/index";
+import { useNavigate } from "react-router-dom";
 
-const menuProps = "CadastroProduto" || "CadastroCategoria"
-
-export function CadastroProduto(props) {
+export function CadastroProduto() {
+  const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
-  const [menu, setMenu] = useState(menuProps);
+  const [menu, setMenu] = useState("CadastroProduto");
 
   const tableHead = ["Codigo", "Nome", "Preço", "Descrição", "Categoria"];
 
@@ -42,16 +41,25 @@ export function CadastroProduto(props) {
 
   function maskPrice(event) {
     var price = event.target.value;
-    price = price.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
-    price = price.replace(/(\d)(\d{2})$/, "$1.$2"); // Insere o separador decimal
-    price = price.replace(/(?=(\d{3})+(\D))\B/g, ""); // Remove o separador de milhar
-    event.target.value = "R$" + price; // Adiciona o símbolo "R$"
+    price = price.replace(/\D/g, "");
+    price = price.replace(/(\d)(\d{2})$/, "$1.$2");
+    price = price.replace(/(?=(\d{3})+(\D))\B/g, "");
+    event.target.value = "R$" + price;
   }
 
   function handleChange(e) {
     const { id, value } = e.target;
-    console.log("O elemento " + id + " tem um novo valor " + value);
     setProduto({ ...produto, [id]: value });
+  }
+
+  function handleMenuChange(selectedMenu) {
+    setMenu(selectedMenu);
+
+    if (selectedMenu === "CadastroProduto") {
+      navigate("/cadastro-produto");
+    } else if (selectedMenu === "CadastroCategoria") {
+      navigate("/cadastro-categoria");
+    }
   }
 
   async function handleFormSubmit(e) {
@@ -65,22 +73,18 @@ export function CadastroProduto(props) {
   }
 
   async function handleCadastro() {
-    // Verifique se todos os campos estão preenchidos
     if (
       produto.nome &&
       produto.preco &&
       produto.descricao &&
       produto.categoria
     ) {
-      // Remove o símbolo "R$" e qualquer caractere não numérico do campo de preço
       const preco = produto.preco.replace(/[^\d.]/g, "");
       const produtoAtualizado = { ...produto, preco };
 
       await handleSubmit(produtoAtualizado);
-      // Limpe os campos do formulário
       resetForm();
     } else {
-      // Exiba o alerta
       setValidated(true);
     }
 
@@ -135,17 +139,13 @@ export function CadastroProduto(props) {
                     <span>Modal</span>
                   </button>
 
-                  <Link to={"/cadastro-categoria"}>
-                  <button className="button-pop-trigger" onClick={() => setMenu("CadastroCategoria")}>
+                  <button className="button-pop-trigger" onClick={() => handleMenuChange("CadastroCategoria")}>
                     <PlusCircle size={32} />
                     <span>Cadastrar Categoria</span>
                   </button>
-                  </Link>
                 </Popover.Content>
-
               </Popover.Portal>
             </Popover.Root>
-            
           </div>
 
           <form 
@@ -224,11 +224,7 @@ export function CadastroProduto(props) {
         </section>
 
         <div className="alinha">
-          <img
-            src="gatinhoo.png"
-            alt="imagem-fundo-produtos"
-            className="img_produto"
-          />
+          <img src="gatinhoo.png" alt="imagem-fundo-produtos"className="img_produto"/>
         </div>
       </main>
 
