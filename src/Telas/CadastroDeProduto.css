@@ -291,3 +291,47 @@
     cursor: pointer;
     width: auto;
 }
+
+.popover-trigger{
+    border: none;
+    transition: .5s;
+  }
+
+.popover-trigger:hover{
+    color: #3ab1b9;
+}
+
+.popover-trigger:focus-visible, .popover-content:focus-visible, .button-popover-trigger:focus-visible{
+    outline: none;
+  }
+  
+  .popover-content, .button-popover-trigger{
+    background-color: whitesmoke;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .popover-content{
+    border-radius: 8px;
+    border: 1px solid rgb(212 212 216);
+    flex-direction: column;
+    overflow: hidden;
+    padding: 8px 4px;
+    z-index: 50;
+  }
+  
+  .popover-content .button-popover-trigger{
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    flex-direction: row;
+    padding: 4px;
+  }
+  
+  .popover-content .button-popover-trigger:hover{
+    background-color: #e5e5e5;
+  }
+  
+  .popover-content > svg{
+    cursor: pointer;
+  }

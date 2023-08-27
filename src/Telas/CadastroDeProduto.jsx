@@ -128,18 +128,18 @@ export function CadastroProduto() {
               </>
             </div>
             <Popover.Root>
-              <Popover.Trigger className="pop-trigger">
+              <Popover.Trigger className="popover-trigger">
                 <DotsThreeVertical size={32} />
               </Popover.Trigger>
 
               <Popover.Portal>
-                <Popover.Content className="pop-content">
-                  <button className="button-pop-trigger" onClick={() => setModal(true)}>
+                <Popover.Content className="popover-content">
+                  <button className="button-popover-trigger" onClick={() => setModal(true)}>
                     <Cards size={32} />
                     <span>Modal</span>
                   </button>
 
-                  <button className="button-pop-trigger" onClick={() => handleMenuChange("CadastroCategoria")}>
+                  <button className="button-popover-trigger" onClick={() => handleMenuChange("CadastroCategoria")}>
                     <PlusCircle size={32} />
                     <span>Cadastrar Categoria</span>
                   </button>
