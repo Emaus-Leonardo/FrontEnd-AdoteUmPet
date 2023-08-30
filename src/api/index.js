@@ -1,5 +1,5 @@
-const apiProdutos = "http://129.146.68.51/aluno12-pfsii/produto";
-const apiCategoria = "http://129.146.68.51/aluno12-pfsii/categoria";
+const apiProdutos = "https://129.146.68.51/aluno12-pfsii/produto";
+const apiCategoria = "https://129.146.68.51/aluno12-pfsii/categoria";
 
 //================== API-Produtos ==================//
 
