@@ -8,7 +8,6 @@ export function Router(){
         <BrowserRouter>
             <Routes>
                 <Route path="*" element={<CadastroProduto />} />
-                
             </Routes>
         </BrowserRouter>
     )
