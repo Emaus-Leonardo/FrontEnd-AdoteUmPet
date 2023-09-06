@@ -1,91 +1,83 @@
-import { Modal } from "../components/ModalProduto";
+import React, { useState, useEffect } from "react";
+import { getAllCategorias, createRegisterCategoria, editRegisterCategoria,} from "../api/index";
 import { Cabecalho } from "../components/Cabecalho";
 import { Footer } from "../components/Footer";
 import { Inputs } from "../components/inputs";
-import { ArrowLeft, } from "@phosphor-icons/react";
+import { ArrowLeft } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 import { AsideCategoria } from "../components/AsideCategoria";
 import "./CadastroDeProduto.css";
-
-import { useState, useEffect } from "react";
-import {getProdutos, handleSubmit,editarProdutos,} from "../api/index";
-import { Link } from "react-router-dom";
-//import { Card } from "react-bootstrap";
 
 const menuProps = "CadatroProduto" || "CadatroCategoria"
 
 export function CadastroCategoria(props) {
-  const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState(menuProps);
-
-  const tableHead = ["Codigo", "Nome"];
-
-  const [validado, setValidated] = useState(false);
-  const [produto, setProduto] = useState({
-    codigo: "",
+  const [categoria, setCategoria] = useState({
+    Id: "",
     nome: "",
     edit: -1,
   });
 
   useEffect(() => {
     async function fetchData() {
-      const produtos = await getProdutos();
-      setAllRegisters(produtos);
+      try {
+        const categorias = await getAllCategorias();
+        setAllRegisters(categorias);
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error);
+      }
     }
     fetchData();
   }, []);
 
-  function handleChange(e) {
+  async function handleChange(e) {
     const { id, value } = e.target;
     console.log("O elemento " + id + " tem um novo valor " + value);
-    setProduto({ ...produto, [id]: value });
+    setCategoria({ ...categoria, [id]: value });
   }
 
   async function handleFormSubmit(e) {
     e.preventDefault();
 
-    if (produto.edit === -1) {
-      handleCadastro();
+    if (categoria.edit === -1) {
+      await handleCadastro();
     } else {
-      handleAtualizacao();
+      await handleAtualizacao();
     }
   }
 
   async function handleCadastro() {
-    // Verifique se todos os campos estão preenchidos
-    if (
-      produto.nome 
-    ) {
-      const produtoAtualizado = { ...produto,};
-  
-      await handleSubmit(produtoAtualizado);
-      // Limpe os campos do formulário
+    if (categoria.nome) {
+      const categoriaAtualizado = { ...categoria };
+
+      await createRegisterCategoria(categoriaAtualizado);
       resetForm();
     } else {
-      // Exiba o alerta
       setValidated(true);
     }
-  
-    const produtos = await getProdutos();
-    setAllRegisters(produtos);
+
+    const categorias = await getAllCategorias();
+    setAllRegisters(categorias);
   }
-  
 
   async function handleAtualizacao() {
-    await editarProdutos(produto, setProduto);
+    await editRegisterCategoria(categoria, setCategoria);
 
-    const produtos = await getProdutos();
-    setAllRegisters(produtos);
+    const categorias = await getAllCategorias();
+    setAllRegisters(categorias);
     resetForm();
   }
 
   function resetForm() {
-    setProduto({
+    setCategoria({
       codigo: "",
       nome: "",
       edit: -1,
     });
   }
+
+  const [validated, setValidated] = useState(false);
 
   return (
     <>
@@ -93,7 +85,7 @@ export function CadastroCategoria(props) {
       <main className="mainSection">
         <section className="FormProduto_container">
           <div className="form-produtos-titulo centro_logo">
-          <div className="titulo">
+            <div className="titulo">
               <img
                 className="vector vectoranimais"
                 src={"vector-3.svg"}
@@ -104,67 +96,56 @@ export function CadastroCategoria(props) {
               </>
             </div>
 
-            <Link to={"/cadastro-produto"}> 
-            <ArrowLeft className="arrow" size={32} onClick={() => setMenu("CadastroProduto")} />
+            <Link to={"/cadastro-produto"}>
+              <ArrowLeft className="arrow" size={32} onClick={() => setMenu("CadastroProduto")} />
             </Link>
-        </div>
+          </div>
 
           <form noValidate onSubmit={handleFormSubmit}>
             <Inputs
               type="number"
-              text="Código do Produto"
+              text="Código da Categoria"
               placeholder="00000"
-              value={produto.codigo}
+              value={categoria.codigo}
               id="codigo"
               name="codigo"
               onChange={handleChange}
               disabled
               style={{ display: "none" }}
-              className={validado && !produto.codigo ? "input-invalid" : ""}
+              className={validated && !categoria.codigo ? "input-invalid" : ""}
             />
 
             <Inputs
               type="text"
               text="Nome da Categoria"
               placeholder="Digite o nome da Categoria"
-              value={produto.nome}
+              value={categoria.nome}
               id="nome"
               name="nome"
               onChange={handleChange}
               required
-              className={validado && !produto.nome ? "input-invalid" : ""}
+              className={validated && !categoria.nome ? "input-invalid" : ""}
             />
 
             <div className="btnProduto mainSection">
               <button type="submit">
-                {produto.edit === -1 ? "Cadastrar Categoria" : "Atualizar Categoria"}
+                {categoria.edit === -1 ? "Cadastrar Categoria" : "Atualizar Categoria"}
               </button>
             </div>
           </form>
 
-          {validado && (
+          {validated && (
             <div className="alert">Por favor, preencha todos os campos!</div>
           )}
 
         </section>
 
         <div className="alinha">
-            <section className="container-main cadastros flex-col aside-cadastro-aceitafazer">
-              <AsideCategoria/>
-            </section>
+          <section className="table-container container-main cadastros flex-col aside-cadastro-aceitafazer">
+          <AsideCategoria setFormCategoria={setCategoria} onInsert={resetForm} />
+          </section>
         </div>
       </main>
-
-      {modal ? (
-        <Modal
-          title={"Cadastro de Produtos"}
-          setModal={setModal}
-          tableHead={tableHead}
-          registerAll={allRegisters}
-          setRegisterAll={setAllRegisters}
-          setFormValidate={setProduto}
-        />
-      ) : null}
 
       <Footer />
     </>

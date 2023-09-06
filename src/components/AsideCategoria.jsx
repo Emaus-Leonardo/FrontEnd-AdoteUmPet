@@ -1,8 +1,11 @@
-import React from "react"; // Certifique-se de importar o React
+import React, { useState, useEffect } from "react";
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { deleteCategoriaP, getAllCategorias } from "../api";
 
-export function AsideCategoria({ categoriaAll, setFormCategria, setCategoriaAll }) {
+export function AsideCategoria({ setFormCategoria, onInsert }) {
+    const tableHead = ["ID", "Nome"];
+
+    const [allRegisters, setAllRegisters] = useState([]);
 
     function editCategoria(categoriaP) {
         const { edit, ...rest } = categoriaP;
@@ -10,47 +13,72 @@ export function AsideCategoria({ categoriaAll, setFormCategria, setCategoriaAll 
             edit: 1,
             ...rest
         };
-        setFormCategria(aux);
+        setFormCategoria(aux);
     }
 
-    async function deleteCategoria(categoriaP) {
-        if (window.confirm(`Quer mesmo deletar esta categoria? ${categoriaP.name}?`)) {
-            const message = await deleteCategoriaP(categoriaP.id);
-            if (message === "success") { // Assuming deleteCategoriaP returns "success" on successful deletion
-                setCategoriaAll(await getAllCategorias());
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const categorias = await getAllCategorias();
+                setAllRegisters(categorias);
+            } catch (error) {
+                console.error("Erro ao buscar categorias:", error);
             }
         }
-    }
+        fetchData();
+    }, [onInsert]);
+
+    async function deleteCategoria(codigo) {
+        const confirmDelete = window.confirm("Tem certeza de que deseja excluir o produto?");
+        if (confirmDelete) {
+          try {
+            await deleteCategoriaP(codigo);
+            const categorias = await getAllCategorias();
+            setAllRegisters(categorias);
+          } catch (error) {
+            console.error("Erro ao excluir o produto:", error);
+          }
+        }
+      }  
 
     return (
         <>
             <div className="aside-categoriaP-header">
                 <img
                     className="vector vectorEntrada"
-                    src={"vector-3.svg"} // Certifique-se de fornecer o caminho correto para a imagem
+                    src={"vector-3.svg"}
                     alt="Vector"
                 />
                 <h2>Registros de Categoria</h2>
             </div>
-            <table>
+
+            <table className="table">
                 <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nome</th>
+                        {tableHead.map((header, index) => (
+                            <th key={index}>{header}</th>
+                        ))}
                         <th scope="col">Editar</th>
                         <th scope="col">Deletar</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    {categoriaAll !== undefined && categoriaAll.map((categoriaP, index) => (
-                        <tr key={index}>
-                            <td data-label="Id">{index + 1}</td>
-                            <td data-label="Categoria-Name">{categoriaP.name}</td>
-                            <td data-label="Action-Edit">
-                                <Pencil size={32} onClick={() => editCategoria(categoriaP)} />
+                    {allRegisters.map((categoria) => (
+                        <tr key={categoria.id}>
+                            <td>{categoria.id}</td>
+                            <td>{categoria.nome}</td>
+                            <td>
+                                <Pencil
+                                    size={32}
+                                    onClick={() => editCategoria(categoria)}
+                                />
                             </td>
-                            <td data-label="Action-Delete">
-                                <Trash size={32} onClick={() => deleteCategoria(categoriaP)} />
+                            <td>
+                                <Trash
+                                    size={32}
+                                    onClick={() => deleteCategoria(categoria.id)}
+                                />
                             </td>
                         </tr>
                     ))}
