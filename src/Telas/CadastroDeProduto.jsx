@@ -10,7 +10,7 @@ import "./CadastroDeProduto.css";
 import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
-import { getProdutos, handleSubmit, editarProdutos } from "../api/index";
+import { getProdutos, handleSubmit, editarProdutos, } from "../api/index";
 import { useNavigate } from "react-router-dom";
 
 export function CadastroProduto() {
@@ -18,7 +18,8 @@ export function CadastroProduto() {
   const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState("CadastroProduto");
-
+  
+  const apiCategoria = "https://129.146.68.51/aluno12-pfsii/categoria";
   const tableHead = ["Codigo", "Nome", "Preço", "Descrição", "Categoria"];
 
   const [validado, setValidated] = useState(false);
@@ -31,10 +32,31 @@ export function CadastroProduto() {
     edit: -1,
   });
 
+  const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true); // Estado para controlar o carregamento das categorias
+
   useEffect(() => {
     async function fetchData() {
       const produtos = await getProdutos();
       setAllRegisters(produtos);
+      try {
+        // Faça a chamada para a sua API de categorias
+        const response = await fetch(apiCategoria);
+        const data = await response.json();
+
+        if (response.ok) {
+          // Se a chamada for bem-sucedida, atualize o estado de categorias
+          setCategories(data);
+        } else {
+          // Lide com erros aqui, se necessário
+          console.error("Erro ao buscar categorias:", data);
+        }
+      } catch (error) {
+        // Lide com erros de rede ou outros erros aqui, se necessário
+        console.error("Erro ao buscar categorias:", error);
+      } finally {
+        setLoadingCategories(false); // Marque o carregamento como concluído, independentemente do resultado
+      }
     }
     fetchData();
   }, []);
@@ -148,8 +170,8 @@ export function CadastroProduto() {
             </Popover.Root>
           </div>
 
-          <form 
-          noValidate onSubmit={handleFormSubmit}>
+          <form
+            noValidate onSubmit={handleFormSubmit}>
             <Inputs
               type="number"
               text="Código do Produto"
@@ -199,16 +221,20 @@ export function CadastroProduto() {
               className={validado && !produto.descricao ? "input-invalid" : ""}
             />
 
-            <Select
-              text="Selecione a Categoria"
-              name="categoria"
-              id="categoria"
-              value={produto.categoria}
-              onChange={handleChange}
-              options={["Comidas", "Brinquedos", "Remedios", "Outro"]}
-              required
-              className={validado && !produto.categoria ? "input-invalid" : ""}
-            />
+            {loadingCategories ? (
+              <p>Carregando categorias...</p>
+            ) : (
+              <Select
+                text="Selecione a Categoria"
+                name="categoria"
+                id="categoria"
+                value={produto.categoria}
+                onChange={handleChange}
+                options={categories.map(category => category.nome)}
+                required
+                className={validado && !produto.categoria ? "input-invalid" : ""}
+              />
+            )}
 
             <div className="btnProduto mainSection">
               <button type="submit">
@@ -224,7 +250,7 @@ export function CadastroProduto() {
         </section>
 
         <div className="alinha">
-          <img src="gatinhoo.png" alt="imagem-fundo-produtos"className="img_produto"/>
+          <img src="gatinhoo.png" alt="imagem-fundo-produtos" className="img_produto" />
         </div>
       </main>
 
