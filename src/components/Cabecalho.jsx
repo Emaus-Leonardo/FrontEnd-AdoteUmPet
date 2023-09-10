@@ -3,6 +3,7 @@ import "./Cabecalho.css";
 import { Link } from "react-router-dom";
 import { Menu } from "./Menu";
 import vetor3 from "../imegens/vector-3.svg"
+import line1 from "../imegens/line-1.svg"
 
 export function Cabecalho() {
   return (
@@ -30,7 +31,7 @@ export function Cabecalho() {
         </div>
         <Menu />
       </div>
-      <img className="line" src={"line-1.svg"} alt="Line 1" />
+      <img className="line" src={line1} alt="Line 1" />
     </header>
   );
 }
