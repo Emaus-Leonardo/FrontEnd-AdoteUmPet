@@ -7,6 +7,8 @@ import { Textarea } from "../components/textarea";
 import * as Popover from '@radix-ui/react-popover';
 import "./CadastroDeProduto.css";
 
+import vetor3 from "../imegens/vector-3.svg"
+import gatinhoo from "../imegens/gatinhoo.png"
 import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
@@ -142,7 +144,7 @@ export function CadastroProduto() {
             <div className="titulo">
               <img
                 className="vector vectoranimais"
-                src={"vector-3.svg"}
+                src={vetor3}
                 alt="Vector"
               />
               <>
@@ -250,7 +252,7 @@ export function CadastroProduto() {
         </section>
 
         <div className="alinha">
-          <img src="gatinhoo.png" alt="imagem-fundo-produtos" className="img_produto" />
+          <img src={gatinhoo} alt="imagem-fundo-produtos" className="img_produto" />
         </div>
       </main>
 

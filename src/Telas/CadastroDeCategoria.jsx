@@ -6,6 +6,7 @@ import { Inputs } from "../components/inputs";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { AsideCategoria } from "../components/AsideCategoria";
+import vetor3 from "../imegens/vector-3.svg"
 import "./CadastroDeProduto.css";
 
 const menuProps = "CadatroProduto" || "CadatroCategoria"
@@ -88,7 +89,7 @@ export function CadastroCategoria(props) {
             <div className="titulo">
               <img
                 className="vector vectoranimais"
-                src={"vector-3.svg"}
+                src={vetor3}
                 alt="Vector"
               />
               <>

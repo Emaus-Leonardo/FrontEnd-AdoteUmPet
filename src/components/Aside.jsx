@@ -1,11 +1,12 @@
 import React from 'react'
 import './Aside.css'
+import logotipo from "../imegens/logotipo.svg"
 
 export function Aside(){
     return(
         <div className='aside flex-col'>
             <div className="aside-header">
-                <img src="logotipo.svg" alt="logotipo-org" />
+                <img src={logotipo} alt="logotipo-org" />
                 <h1>Pet<span>Adopte</span></h1>
             </div>
 

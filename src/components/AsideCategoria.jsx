@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Pencil, Trash } from "@phosphor-icons/react";
 import { deleteCategoriaP, getAllCategorias } from "../api";
+import vetor3 from "../imegens/vector-3.svg"
 
 export function AsideCategoria({ setFormCategoria, onInsert }) {
     const tableHead = ["ID", "Nome"];
@@ -46,7 +47,7 @@ export function AsideCategoria({ setFormCategoria, onInsert }) {
             <div className="aside-categoriaP-header">
                 <img
                     className="vector vectorEntrada"
-                    src={"vector-3.svg"}
+                    src={vetor3}
                     alt="Vector"
                 />
                 <h2>Registros de Categoria</h2>

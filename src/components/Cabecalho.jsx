@@ -2,13 +2,14 @@
 import "./Cabecalho.css";
 import { Link } from "react-router-dom";
 import { Menu } from "./Menu";
+import vetor3 from "../imegens/vector-3.svg"
 
 export function Cabecalho() {
   return (
     <header className="header">
       <div className="flex-row">
         <div className="logo">
-          <img className="vector" src={"vector-3.svg"} alt="Vector" />
+          <img className="vector" src={vetor3} alt="Vector" />
           <Link to="/">
             <h1 className="title">
               <span className="span0">Pet</span>
