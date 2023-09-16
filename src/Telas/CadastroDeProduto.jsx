@@ -73,6 +73,7 @@ export function CadastroProduto() {
 
   function handleChange(e) {
     const { id, value } = e.target;
+    console.log("O elemento " + id + " tem um novo valor " + value);
     setProduto({ ...produto, [id]: value });
   }
 
@@ -172,8 +173,7 @@ export function CadastroProduto() {
             </Popover.Root>
           </div>
 
-          <form
-            noValidate onSubmit={handleFormSubmit}>
+          <form noValidate onSubmit={handleFormSubmit}>
             <Inputs
               type="number"
               text="Código do Produto"
