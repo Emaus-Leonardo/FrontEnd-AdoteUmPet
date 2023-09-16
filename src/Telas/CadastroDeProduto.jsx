@@ -12,7 +12,7 @@ import gatinhoo from "../imegens/gatinhoo.png"
 import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
 
 import { useState, useEffect } from "react";
-import { getProdutos, handleSubmit, editarProdutos, } from "../api/index";
+import { getProdutos, handleSubmit, editarProdutos, } from "../api/index"; // Importar função getCategorias
 import { useNavigate } from "react-router-dom";
 
 export function CadastroProduto() {
@@ -20,7 +20,7 @@ export function CadastroProduto() {
   const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState("CadastroProduto");
-  
+
   const apiCategoria = "https://129.146.68.51/aluno12-pfsii/categoria";
   const tableHead = ["Codigo", "Nome", "Preço", "Descrição", "Categoria"];
 
@@ -30,34 +30,30 @@ export function CadastroProduto() {
     nome: "",
     preco: "",
     descricao: "",
-    categoria: "",
+    categoria: "", // Alterado para uma string vazia para categoria
     edit: -1,
   });
 
   const [categories, setCategories] = useState([]);
-  const [loadingCategories, setLoadingCategories] = useState(true); // Estado para controlar o carregamento das categorias
+  const [loadingCategories, setLoadingCategories] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const produtos = await getProdutos();
       setAllRegisters(produtos);
       try {
-        // Faça a chamada para a sua API de categorias
         const response = await fetch(apiCategoria);
         const data = await response.json();
 
         if (response.ok) {
-          // Se a chamada for bem-sucedida, atualize o estado de categorias
-          setCategories(data);
+          setCategories(data); // Defina as categorias recuperadas da API
         } else {
-          // Lide com erros aqui, se necessário
           console.error("Erro ao buscar categorias:", data);
         }
       } catch (error) {
-        // Lide com erros de rede ou outros erros aqui, se necessário
         console.error("Erro ao buscar categorias:", error);
       } finally {
-        setLoadingCategories(false); // Marque o carregamento como concluído, independentemente do resultado
+        setLoadingCategories(false);
       }
     }
     fetchData();
@@ -74,7 +70,13 @@ export function CadastroProduto() {
   function handleChange(e) {
     const { id, value } = e.target;
     console.log("O elemento " + id + " tem um novo valor " + value);
-    setProduto({ ...produto, [id]: value });
+    if (id === "categoriaNome") {
+      // Extrai o ID da categoria selecionada
+      const categoriaId = categories.find(category => category.nome === value)?.id;
+      setProduto({ ...produto, categoria: categoriaId });
+    } else {
+      setProduto({ ...produto, [id]: value });
+    }
   }
 
   function handleMenuChange(selectedMenu) {
@@ -95,6 +97,7 @@ export function CadastroProduto() {
     } else {
       handleAtualizacao();
     }
+    console.log("Formulário enviado");
   }
 
   async function handleCadastro() {
@@ -226,17 +229,29 @@ export function CadastroProduto() {
             {loadingCategories ? (
               <p>Carregando categorias...</p>
             ) : (
-              <Select
-                text="Selecione a Categoria"
-                name="categoria"
-                id="categoria"
-                value={produto.categoria}
-                onChange={handleChange}
-                options={categories.map(category => category.nome)}
-                required
-                className={validado && !produto.categoria ? "input-invalid" : ""}
-              />
+              <>
+                <Select
+                  text="Selecione a Categoria"
+                  name="categoriaNome"
+                  id="categoriaNome"
+                  value={categories.find(category => category.id === produto.categoria)?.nome || ''}
+                  onChange={handleChange}
+                  options={categories.map(category => category.nome)}
+                  required
+                  className={validado && !produto.categoria ? "input-invalid" : ""}
+                />
+
+                {/* Campo oculto para armazenar o ID da categoria */}
+                <input
+                  type="hidden"
+                  name="categoria"
+                  id="categoria"
+                  value={produto.categoria}
+                  onChange={handleChange}
+                />
+              </>
             )}
+
 
             <div className="btnProduto mainSection">
               <button type="submit">

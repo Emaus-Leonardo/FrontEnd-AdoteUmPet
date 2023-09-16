@@ -121,6 +121,25 @@ export async function deleteCategoriaP(id) {
   }
 }
 
+export async function consultarCategoriaPorId(id) {
+  try {
+    const response = await fetch(`${apiCategoria}/${id}`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao consultar a categoria: ${response.statusText}`);
+    }
+
+    const categoria = await response.json();
+    return categoria;
+  } catch (error) {
+    console.error('Erro ao consultar a categoria:', error);
+    throw error;
+  }
+}
+
+
 //----------------------------- API Tipo ---------------------------------//
 
 export async function getAllTipo() {

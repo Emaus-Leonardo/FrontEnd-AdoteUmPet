@@ -114,6 +114,7 @@ export function Modal(props) {
                     </tr>
                   );
                 })}
+
           </tbody>
         </table>
       </div>
