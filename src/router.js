@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CadastroProduto } from './Telas/CadastroDeProduto'
 import { CadastroCategoria } from './Telas/CadastroDeCategoria'
+import { CadastroAdocao } from './Telas/CadastroDeAdocao'
+import { CadastroTipo } from './Telas/CadastroDeTipo'
 
 export function Router(){
     return(
@@ -9,6 +11,8 @@ export function Router(){
             <Routes>
                 <Route path="*" element={<CadastroProduto />} />
                 <Route path="cadastro-categoria" element={<CadastroCategoria />} />
+                <Route path="cadastro-adoção" element={<CadastroAdocao />} />
+                <Route path="cadastro-tipo" element={<CadastroTipo />} />
             </Routes>
         </BrowserRouter>
     )
