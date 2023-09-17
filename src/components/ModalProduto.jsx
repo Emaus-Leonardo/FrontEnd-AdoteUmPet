@@ -4,8 +4,7 @@ import { excluirProduto, getProdutos } from "../api/index";
 import { useState } from "react";
 
 export function Modal(props) {
-  const { title, tableHead, registerAll, setRegisterAll, setFormValidate, ChangeValueObject, setModal } = props;
-  console.log(registerAll);
+  const { title, tableHead, registerAll, setRegisterAll, setFormValidate, ChangeValueObject, setModal, categories } = props;
   const [search, setSearch] = useState("");
 
   function editRegister(register, index) {
@@ -85,36 +84,31 @@ export function Modal(props) {
             {registerAll !== undefined && registerAll.length > 0 &&
               registerAll
                 .filter((register) =>
-                  Object.values(register.nome)
-                    .join("")
-                    .toLowerCase()
-                    .includes(search.toLowerCase())
+                  register.nome.toLowerCase().includes(search.toLowerCase())
                 )
-                .map((registerInput, index) => {
-                  const register = Object.values(registerInput);
-
-                  return (
-                    <tr key={index}>
-                      {register.map((registerInput, index) => (
-                        <td key={index}>{registerInput}</td>
-                      )
-                      )}
-                      <td>
-                        <Pencil
-                          size={32}
-                          onClick={() => editRegister(registerInput, index)}
-                        />
-                      </td>
-                      <td>
-                        <Trash
-                          size={32}
-                          onClick={() => deletarProduto(registerInput.codigo)}
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-
+                .map((registerInput, index) => (
+                  <tr key={index}>
+                    <td>{registerInput.codigo}</td>
+                    <td>{registerInput.nome}</td>
+                    <td>{registerInput.preco}</td>
+                    <td>{registerInput.descricao}</td>
+                    <td>
+                      {categories.find((category) => category.id === registerInput.categoria)?.nome || 'Categoria Desconhecida'}
+                    </td>
+                    <td>
+                      <Pencil
+                        size={32}
+                        onClick={() => editRegister(registerInput, index)}
+                      />
+                    </td>
+                    <td>
+                      <Trash
+                        size={32}
+                        onClick={() => deletarProduto(registerInput.codigo)}
+                      />
+                    </td>
+                  </tr>
+                ))}
           </tbody>
         </table>
       </div>

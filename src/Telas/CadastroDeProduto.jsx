@@ -226,9 +226,7 @@ export function CadastroProduto() {
               className={validado && !produto.descricao ? "input-invalid" : ""}
             />
 
-            {loadingCategories ? (
-              <p>Carregando categorias...</p>
-            ) : (
+            {(
               <>
                 <Select
                   text="Selecione a Categoria"
@@ -279,8 +277,10 @@ export function CadastroProduto() {
           registerAll={allRegisters}
           setRegisterAll={setAllRegisters}
           setFormValidate={setProduto}
+          categories={categories} 
         />
       ) : null}
+
 
       <Footer />
     </>
