@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import { getAllCategorias, createRegisterCategoria, editRegisterCategoria,} from "../api/index";
 import { Cabecalho } from "../components/Cabecalho";
@@ -15,7 +17,7 @@ export function CadastroCategoria(props) {
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState(menuProps);
   const [categoria, setCategoria] = useState({
-    Id: "",
+    id: "",
     nome: "",
     edit: -1,
   });
@@ -152,3 +154,4 @@ export function CadastroCategoria(props) {
     </>
   );
 }
+

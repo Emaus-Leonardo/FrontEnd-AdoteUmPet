@@ -93,7 +93,7 @@ export function Modal(props) {
                     <td>{registerInput.preco}</td>
                     <td>{registerInput.descricao}</td>
                     <td>
-                      {categories.find((category) => category.id === registerInput.categoria)?.nome || 'Categoria Desconhecida'}
+                    {categories.find((category) => category.id === registerInput.categoria)?.nome || 'Categoria Desconhecida'}
                     </td>
                     <td>
                       <Pencil
