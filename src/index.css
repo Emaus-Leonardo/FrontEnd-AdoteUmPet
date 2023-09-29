@@ -288,6 +288,7 @@ section{
 .input-invalid {
   border: 2px solid red !important;
   transition: .5s;
+
 }
 
 .label-invalid {

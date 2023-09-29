@@ -4,34 +4,13 @@ import { excluirAdocao, getAdocao,  } from "../api/index";
 import { useState } from "react";
 
 export function Modal(props) {
-  const { title, tableHead, registerAll, setRegisterAll, setFormValidate, ChangeValueObject, setModal } = props;
-  console.log(registerAll);
+  const { title, tableHead, registerAll, setRegisterAll, setFormValidate, setModal } = props;
   const [search, setSearch] = useState("");
 
   function editRegister(register, index) {
-    if (ChangeValueObject) {
-      ChangeValueObject(register);
-    }
-
-    if (register.email !== undefined) {
-      const auxRegisters = {
-        edit: index,
-        email: register.email,
-        enderecoRua: register.endereco?.split(" - ")[0],
-        enderecoNumero: register.endereco?.split(" - ")[1],
-        enderecoCep: register.endereco?.split(" - ")[2],
-        enderecoCidade: register.endereco?.split(" - ")[3],
-        id: register.id,
-        nome: register.nome,
-        senha: register.senha,
-        senhaConfirmar: register.senha,
-        telefone: register.telefone,
-      };
-
-      setFormValidate(auxRegisters);
-    }
-
+    // Atualize o formulário com os dados do registro selecionado
     setFormValidate(register);
+    setModal(false); // Feche o modal ao clicar em "Editar"
   }
 
   async function deletarAdocao(codigo) {
@@ -97,8 +76,7 @@ export function Modal(props) {
                     <tr key={index}>
                       {register.map((registerInput, index) => (
                         <td key={index}>{registerInput}</td>
-                      )
-                      )}
+                      ))}
                       <td>
                         <Pencil
                           size={32}

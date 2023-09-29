@@ -14,7 +14,7 @@ export function Inputs({ type, text, name, placeholder, number, value, onChange,
         required={required}
         disabled={disabled}
         display={display}
-        onInput={maskPrice} // Chame a função maskPrice aqui
+        onInput={maskPrice} 
         className={className}
         {...(number && { step: 'any' })}
       />

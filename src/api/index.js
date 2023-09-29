@@ -199,6 +199,17 @@ export async function deleteTipo(id) {
   }
 }
 
+export async function getByIdRegisterTipo(index){
+  let aux = await fetch(`${apiTipo}/${index}`, {
+      method: "GET",
+  })
+  .then((data) => data.json())
+  .then((repos) => repos)
+  .catch(e => e);
+
+  return aux;
+}
+
 //================== API-Adoção ==================//
 
 export async function getAdocao() {

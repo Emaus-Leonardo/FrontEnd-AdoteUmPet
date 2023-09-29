@@ -3,15 +3,19 @@ import { Modal } from "../components/ModalAdocao";
 import { Cabecalho } from "../components/Cabecalho";
 import { Footer } from "../components/Footer";
 import { Inputs } from "../components/inputs";
-
-import * as Popover from '@radix-ui/react-popover';
+import { CheckboxDropdownTipo } from "../components/tipo";
+import * as Popover from "@radix-ui/react-popover";
 import vetor3 from "../imegens/vector-3.svg";
 import cat from "../imegens/catt.jpg";
 
 import { Cards, DotsThreeVertical, PlusCircle } from "@phosphor-icons/react";
-import { getAdocao, handleSubmitAdocao, editarAdocao } from "../api/index";
-import { useNavigate } from "react-router-dom";
+import {
+  getAdocao,
+  handleSubmitAdocao,
+  editarAdocao,
+} from "../api/index";
 
+import { useNavigate } from "react-router-dom";
 import "./CadastroDeProduto.css";
 
 export function CadastroAdocao() {
@@ -19,41 +23,38 @@ export function CadastroAdocao() {
   const [modal, setModal] = useState(false);
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState("CadastroAdocao");
-
-  const apiTipo = "https://129.146.68.51/aluno12-pfsii/tipo";
-  const tableHead = ["Código", "Nome", "Email", "Celular", "Tipo"];
-
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [validated, setValidated] = useState(false);
   const [adocao, setAdocao] = useState({
     codigo: "",
     nome: "",
     email: "",
     celular: "",
-    tipo: "",
+    tipos: [],
     edit: -1,
   });
 
+  const apiTipo = "https://129.146.68.51/aluno12-pfsii/tipo";
+  const tableHead = ["Código", "Nome", "Email", "Celular", "Tipo"];
+
   const [categories, setCategories] = useState([]);
-  const [loadingCategories, setLoadingCategories] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       const adocoes = await getAdocao();
       setAllRegisters(adocoes);
-
       try {
         const response = await fetch(apiTipo);
         const data = await response.json();
 
         if (response.ok) {
-          setCategories(data);
+          setCategories(data); // Defina as tipo recuperadas da API
         } else {
-          console.error("Erro ao buscar categorias:", data);
+          console.error("Erro ao buscar tipo:", data);
         }
       } catch (error) {
-        console.error("Erro ao buscar categorias:", error);
+        console.error("Erro ao buscar tipo:", error);
       } finally {
-        setLoadingCategories(false);
       }
     }
     fetchData();
@@ -61,6 +62,7 @@ export function CadastroAdocao() {
 
   function handleChange(e) {
     const { id, value } = e.target;
+    console.log("O elemento " + id + " tem um novo valor " + value);
     setAdocao({ ...adocao, [id]: value });
   }
 
@@ -74,8 +76,11 @@ export function CadastroAdocao() {
     }
   }
 
+
   async function handleFormSubmit(e) {
     e.preventDefault();
+
+    console.log("Formulário submetido");
 
     if (adocao.edit === -1) {
       handleCadastro();
@@ -85,6 +90,8 @@ export function CadastroAdocao() {
   }
 
   async function handleCadastro() {
+    console.log("Tentando cadastrar");
+
     if (
       adocao.nome &&
       adocao.email &&
@@ -92,20 +99,24 @@ export function CadastroAdocao() {
       adocao.tipo
     ) {
       const adocaoAtualizada = { ...adocao };
+      console.log("Cadastro válido: ", adocaoAtualizada);
 
       await handleSubmitAdocao(adocaoAtualizada);
       resetForm();
     } else {
+      console.log("Cadastro inválido");
       setValidated(true);
     }
 
     const adocoes = await getAdocao();
     setAllRegisters(adocoes);
-
   }
 
   async function handleAtualizacao() {
-    await editarAdocao(adocao, setAdocao);
+    const adocaoAtualizada = { ...adocao };
+    adocaoAtualizada.tipos = selectedOptions; // Atualize os tipos selecionados com os valores apropriados
+
+    await editarAdocao(adocaoAtualizada, setAdocao);
 
     const adocoes = await getAdocao();
     setAllRegisters(adocoes);
@@ -210,18 +221,22 @@ export function CadastroAdocao() {
               className={validated && !adocao.celular ? "input-invalid" : ""}
             />
 
-            <Inputs
-              type="text"
-              text="Tipo"
-              placeholder="Digite o tipo do Adotante"
-              value={adocao.tipo}
-              id="tipo"
-              name="tipo"
-              onChange={handleChange}
-              required
-              className={validated && !adocao.tipo ? "input-invalid" : ""}
-            />
-
+            <div className={validated && !adocao.celular ? "input-invalid" : ""}>
+              <CheckboxDropdownTipo
+                type="checkbox"
+                id="tipoNome"
+                name="tipoNome"
+                required
+                value={categories.find((category) => category.id === adocao.categoria)?.nome || ""}
+                tipos={categories}
+                formValidate={adocao}
+                setFormValidate={setAdocao}
+                titleCheckbox="Selecione o Tipo"
+                onChange={handleChange}
+                selectedOptions={adocao.tipos}
+                setSelectedOptions={setSelectedOptions}
+              />
+            </div>
             <div className="btnProduto mainSection">
               <button type="submit">
                 {adocao.edit === -1 ? "Cadastrar Adoção" : "Atualizar Adoção"}
@@ -247,6 +262,7 @@ export function CadastroAdocao() {
           registerAll={allRegisters}
           setRegisterAll={setAllRegisters}
           setFormValidate={setAdocao}
+          categories={categories}
         />
       ) : null}
 
