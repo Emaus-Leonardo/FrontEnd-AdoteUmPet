@@ -10,21 +10,21 @@ export function CheckboxDropdownTipo({
   required,
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]); // Inicialize com um array vazio
 
   useEffect(() => {
-    // Atualize os tipos selecionados quando o formulário mudar
-    setSelectedOptions(formValidate.tipo || []); // Certifique-se de que formValidate.tipo seja uma array
+    // Certifique-se de que formValidate.tipo seja uma array
+    const formTipo = Array.isArray(formValidate.tipo) ? formValidate.tipo : [];
+    setSelectedOptions(formTipo);
   }, [formValidate]);
 
   const handleTipoChange = (tipoId) => {
     let updatedTipos = [];
-    if (Array.isArray(selectedOptions)) {
-      updatedTipos = selectedOptions.includes(tipoId)
-        ? selectedOptions.filter((id) => id !== tipoId)
-        : [...selectedOptions, tipoId];
+
+    if (selectedOptions.includes(tipoId)) {
+      updatedTipos = selectedOptions.filter((id) => id !== tipoId);
     } else {
-      updatedTipos = [tipoId];
+      updatedTipos = [...selectedOptions, tipoId];
     }
 
     setSelectedOptions(updatedTipos);
