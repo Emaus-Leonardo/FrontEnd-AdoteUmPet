@@ -155,3 +155,5 @@ export function CadastroTipo(props) {
     </>
   );
 }
+
+
