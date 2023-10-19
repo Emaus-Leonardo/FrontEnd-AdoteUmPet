@@ -3,7 +3,7 @@ import { Pencil, Trash } from "@phosphor-icons/react";
 import { deleteTipo, getAllTipo } from "../api";
 import vetor3 from "../imegens/vector-3.svg"
 
-export function AsideTipo({ setFormtipo, onInsert }) {
+export function AsideTipo({ setFormTipo, onInsert }) {
     const tableHead = ["ID", "Nome"];
 
     const [allRegisters, setAllRegisters] = useState([]);
@@ -14,7 +14,7 @@ export function AsideTipo({ setFormtipo, onInsert }) {
             edit: 1,
             ...rest
         };
-        setFormtipo(aux);
+        setFormTipo(aux);
     }
 
     useEffect(() => {

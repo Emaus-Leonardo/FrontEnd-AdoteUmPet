@@ -6,15 +6,15 @@ import { Inputs } from "../components/inputs";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import { AsideTipo } from "../components/AsideTipo";
-import vetor3 from "../imegens/vector-3.svg"
+import vetor3 from "../imegens/vector-3.svg";
 import "./CadastroDeProduto.css";
 
-const menuProps = "CadastroAdocao" || "CadastroTipo"; // Corrigido a variável de menu
+const menuProps = "CadastroAdocao" || "CadastroTipo";
 
 export function CadastroTipo(props) {
   const [allRegisters, setAllRegisters] = useState([]);
   const [menu, setMenu] = useState(menuProps);
-  const [tipo, setTipo] = useState({ // Corrigido para 'tipo' em vez de 'categoria'
+  const [tipo, setTipo] = useState({
     codigo: "",
     nome: "",
     edit: -1,
@@ -23,10 +23,10 @@ export function CadastroTipo(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const tipos = await getAllTipo(); // Corrigido o nome da função
+        const tipos = await getAllTipo();
         setAllRegisters(tipos);
       } catch (error) {
-        console.error("Erro ao buscar tipos de animal:", error); // Corrigido a mensagem de erro
+        console.error("Erro ao buscar tipos de animal:", error);
       }
     }
     fetchData();
@@ -41,7 +41,7 @@ export function CadastroTipo(props) {
   async function handleFormSubmit(e) {
     e.preventDefault();
 
-    if (tipo.edit === -1) { // Corrigido para 'tipo' em vez de 'categoria'
+    if (tipo.edit === -1) {
       await handleCadastro();
     } else {
       await handleAtualizacao();
@@ -61,13 +61,17 @@ export function CadastroTipo(props) {
     const tipos = await getAllTipo();
     setAllRegisters(tipos);
   }
-
   async function handleAtualizacao() {
-    await editRegisterTipo(tipo, setTipo); // Corrigido para 'tipo' em vez de 'categoria'
+    if (tipo.nome) {
+      // Verifique se o campo "nome" não está vazio
+      await editRegisterTipo(tipo, setTipo);
 
-    const tipos = await getAllTipo();
-    setAllRegisters(tipos);
-    resetForm();
+      const tipos = await getAllTipo();
+      setAllRegisters(tipos);
+      resetForm();
+    } else {
+      setValidated(true);
+    }
   }
 
   function resetForm() {
@@ -87,18 +91,18 @@ export function CadastroTipo(props) {
         <section className="FormProduto_container">
           <div className="form-produtos-titulo centro_logo">
             <div className="titulo">
-              <img
-                className="vector vectoranimais"
-                src={vetor3}
-                alt="Vector"
-              />
+              <img className="vector vectoranimais" src={vetor3} alt="Vector" />
               <>
                 Cadastro de <span className="span1">Tipo</span>
               </>
             </div>
 
             <Link to={"/cadastro-adoção"}>
-              <ArrowLeft className="arrow" size={32} onClick={() => setMenu("CadastroAdocao")} />
+              <ArrowLeft
+                className="arrow"
+                size={32}
+                onClick={() => setMenu("CadastroAdocao")}
+              />
             </Link>
           </div>
 
@@ -138,7 +142,6 @@ export function CadastroTipo(props) {
           {validated && (
             <div className="alert">Por favor, preencha todos os campos!</div>
           )}
-
         </section>
 
         <div className="alinha">

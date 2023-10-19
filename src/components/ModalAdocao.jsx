@@ -1,27 +1,29 @@
 import { MagnifyingGlass, Pencil, Trash, X } from "@phosphor-icons/react";
-import './Modal.css'
-import { excluirAdocao, getAdocao,  } from "../api/index";
+import "./Modal.css";
+import { excluirAdocao, getAdocao } from "../api/index";
 import { useState } from "react";
 
 export function Modal(props) {
-  const { title, tableHead, registerAll, setRegisterAll, setFormValidate, setModal } = props;
+  const {
+    title,
+    tableHead,
+    registerAll,
+    setRegisterAll,
+    setFormValidate,
+    setModal,
+  } = props;
   const [search, setSearch] = useState("");
-  const [modalData, setModalData] = useState(null);
-
 
   function editRegister(register, index) {
     // Atualize o formulário com os dados do registro selecionado
     setFormValidate(register);
-  
-    // Passe os dados do registro para o componente CheckboxDropdownTipo
-    setModalData(register);
-  
     setModal(false); // Feche o modal ao clicar em "Editar"
   }
-  
 
   async function deletarAdocao(codigo) {
-    const confirmDelete = window.confirm("Tem certeza de que deseja excluir o produto?");
+    const confirmDelete = window.confirm(
+      "Tem certeza de que deseja excluir o produto?"
+    );
     if (confirmDelete) {
       try {
         await excluirAdocao(codigo);
@@ -68,7 +70,8 @@ export function Modal(props) {
             </tr>
           </thead>
           <tbody>
-            {registerAll !== undefined && registerAll.length > 0 &&
+            {registerAll !== undefined &&
+              registerAll.length > 0 &&
               registerAll
                 .filter((register) =>
                   Object.values(register.nome)
